@@ -1,0 +1,13 @@
+# Parámetros del pipeline model_evaluation
+model_evaluation:
+  target: Revenue
+  # Un modelo más complejo solo se elige si reduce el MAE de la mejor línea base
+  # en al menos este porcentaje. Si no, se prefiere la alternativa más simple
+  # (más fácil de explicar e implementar).
+  min_improvement: 0.02
+  # Líneas base: nombre -> columna de features que actúa como pronóstico
+  baselines:
+    "Ayer (naive)": Revenue_lag1
+    "Mismo día semana pasada": Revenue_lag7
+    "Promedio móvil 28 días": Revenue_rmean28
+    "Promedio histórico del vendedor": Revenue_expanding_mean

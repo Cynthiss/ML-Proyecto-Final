@@ -98,3 +98,48 @@ optuna_trials:
   save_args:
     index: false
 
+# ---------- 07_model_output ----------
+test_predictions:
+  type: pandas.ParquetDataset
+  filepath: data/07_model_output/test_predictions.parquet
+
+# ---------- 08_reporting: evaluación ----------
+model_metrics:
+  type: pandas.CSVDataset
+  filepath: data/08_reporting/model_metrics.csv
+  save_args:
+    index: false
+
+model_selection:
+  type: json.JSONDataset
+  filepath: data/08_reporting/model_selection.json
+  save_args:
+    indent: 2
+    ensure_ascii: false
+
+feature_importance:
+  type: pandas.CSVDataset
+  filepath: data/08_reporting/feature_importance_shap.csv
+  save_args:
+    index: false
+
+plot_shap_summary:
+  type: matplotlib.MatplotlibDataset
+  filepath: data/08_reporting/shap_summary.png
+  save_args:
+    dpi: 150
+    bbox_inches: tight
+
+plot_forecast_vs_actual:
+  type: matplotlib.MatplotlibDataset
+  filepath: data/08_reporting/forecast_vs_actual.png
+  save_args:
+    dpi: 150
+    bbox_inches: tight
+
+plot_model_comparison:
+  type: matplotlib.MatplotlibDataset
+  filepath: data/08_reporting/model_comparison.png
+  save_args:
+    dpi: 150
+    bbox_inches: tight

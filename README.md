@@ -29,14 +29,15 @@
 | **Tendencia** | Ventas estables, de ~Q233M por semana (+0.008% semanal). El día de la semana no influye (p = 0.87). |
 | **Contribución** | Cada vendedor aporta entre 4.30% y 4.39% del total. La brecha entre el primero y el último es de 2.1%: 3 vendedores están por encima del promedio, 18 en el promedio y 2 por debajo. |
 | **Qué diferencia a los vendedores** | El **ticket promedio** (p < 0.001; correlación 0.91 con el ingreso), no el número de ventas (p = 0.40). |
+| **De dónde sale el ticket alto** | Los vendedores de mejor ticket **concentran más unidades en sus ventas de mayor valor** (rho = 0.90) y menos en las de menor valor (rho = −0.66). En total venden las mismas unidades, pero las ponen donde más ingreso generan. |
 | **Descuentos** | El 20% de las ventas lleva descuento y suma Q132M (3% del ingreso bruto), pero las unidades por venta no cambian: 13.0 con 0%, 10% o 20% de descuento. |
 | **Perfil para contratación** | Edad, antigüedad, edad al ser contratado y género **no** se relacionan con el desempeño (todos los p > 0.15). En el modelo, el perfil explica solo ~6% de la importancia según SHAP. |
 
 **Recomendaciones:**
 1. Fijar metas con el promedio histórico de cada vendedor.
-2. Medir y premiar el ticket promedio, no el número de ventas.
+2. Medir y premiar el ticket promedio, no el número de ventas, y entrenar al equipo en venta sugestiva: aumentar la cantidad cuando la venta es de alto valor, como ya hacen los vendedores de mejor ticket.
 3. Revisar la política de descuentos, que hoy cede margen sin generar volumen.
-4. Contratar por habilidades de venta (venta cruzada o consultiva), sin filtros demográficos.
+4. Contratar por habilidades de venta (venta sugestiva o consultiva, evaluable con un caso práctico en la entrevista), sin filtros demográficos.
 
 > **Limitación importante:** los datos son muy homogéneos: todos los vendedores venden casi lo mismo y la venta diaria varía solo ±2.8%. Esto sugiere un dataset sintético o simulado. Las conclusiones describen *estos* datos y deben validarse con información real antes de usarse en decisiones de compensación o contratación. Con solo 23 vendedores, las pruebas sobre el perfil tienen poca potencia estadística.
 
@@ -75,7 +76,9 @@ flowchart LR
 │   ├── 01_raw/                # tablas completas del curso (NO versionadas)
 │   └── 02_intermediate … 08_reporting/   # salidas generadas por kedro run
 ├── docs/erd.png               # diagrama entidad-relación
-├── notebooks/00_intro.ipynb   # exploración inicial del curso
+├── notebooks/
+│   ├── 00_intro.ipynb         # introducción al dataset (material del curso)
+│   └── 01_exploracion.ipynb   # exploración: calidad, outliers, patrones y decisiones
 ├── scripts/make_sample.py     # genera data/00_sample a partir de data/01_raw
 ├── src/sales_performance/pipelines/   # un paquete por pipeline (nodes.py + pipeline.py)
 └── tests/                     # pruebas unitarias por pipeline + integración

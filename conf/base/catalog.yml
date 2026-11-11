@@ -1,0 +1,31 @@
+# Data Catalog — proyecto "Desempeño de las ventas" (Reto 1)
+# Docs: https://docs.kedro.org/en/stable/catalog-data/introduction/
+
+# ---------- 01_raw: tablas originales del curso ----------
+raw_sales:
+  type: pandas.CSVDataset
+  filepath: data/01_raw/sales.csv
+
+raw_products:
+  type: pandas.CSVDataset
+  filepath: data/01_raw/products.csv
+
+raw_categories:
+  type: pandas.CSVDataset
+  filepath: data/01_raw/categories.csv
+
+raw_employees:
+  type: pandas.CSVDataset
+  filepath: data/01_raw/employees.csv
+
+raw_customers:
+  type: pandas.CSVDataset
+  filepath: data/01_raw/customers.csv
+
+raw_cities:
+  type: pandas.CSVDataset
+  filepath: data/01_raw/cities.csv
+
+raw_countries:
+  type: pandas.CSVDataset
+  filepath: data/01_raw/countries.csv

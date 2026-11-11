@@ -143,3 +143,66 @@ plot_model_comparison:
   save_args:
     dpi: 150
     bbox_inches: tight
+
+# ---------- 08_reporting: análisis descriptivo del reto ----------
+seller_summary:
+  type: pandas.CSVDataset
+  filepath: data/08_reporting/seller_summary.csv
+  save_args:
+    index: false
+
+sales_insights:
+  type: json.JSONDataset
+  filepath: data/08_reporting/sales_insights.json
+  save_args:
+    indent: 2
+    ensure_ascii: false
+
+plot_weekly_trend:
+  type: matplotlib.MatplotlibDataset
+  filepath: data/08_reporting/weekly_trend.png
+  save_args:
+    dpi: 150
+    bbox_inches: tight
+
+plot_weekday_pattern:
+  type: matplotlib.MatplotlibDataset
+  filepath: data/08_reporting/weekday_pattern.png
+  save_args:
+    dpi: 150
+    bbox_inches: tight
+
+plot_seller_contribution:
+  type: matplotlib.MatplotlibDataset
+  filepath: data/08_reporting/seller_contribution.png
+  save_args:
+    dpi: 150
+    bbox_inches: tight
+
+plot_seller_trend:
+  type: matplotlib.MatplotlibDataset
+  filepath: data/08_reporting/seller_trend.png
+  save_args:
+    dpi: 150
+    bbox_inches: tight
+
+plot_volume_vs_ticket:
+  type: matplotlib.MatplotlibDataset
+  filepath: data/08_reporting/volume_vs_ticket.png
+  save_args:
+    dpi: 150
+    bbox_inches: tight
+
+plot_discount_effect:
+  type: matplotlib.MatplotlibDataset
+  filepath: data/08_reporting/discount_effect.png
+  save_args:
+    dpi: 150
+    bbox_inches: tight
+
+plot_profile_vs_performance:
+  type: matplotlib.MatplotlibDataset
+  filepath: data/08_reporting/profile_vs_performance.png
+  save_args:
+    dpi: 150
+    bbox_inches: tight

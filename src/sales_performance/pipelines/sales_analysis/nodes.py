@@ -23,6 +23,7 @@ import pandas as pd  # noqa: E402
 from scipy import stats  # noqa: E402
 
 DAYS_PER_WEEK = 7
+SLOPE_DECIMALS = 6
 WEEKDAYS_ES = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"]
 PROFILE_LABELS = {
     "Age": "Edad (años)",
@@ -60,7 +61,13 @@ def _weekly_slope_pct(seller_daily: pd.DataFrame) -> pd.Series:
     def slope(g: pd.DataFrame) -> float:
         return 100 * np.polyfit(g["t"], g["Revenue"], 1)[0] / g["Revenue"].mean()
 
-    return weekly.groupby("SalesPersonID")[["t", "Revenue"]].apply(slope)
+    # se redondea para que el ruido numérico (p. ej. 1e-13 en vez de 0) no cuente
+    # como crecimiento o caída; depende de la librería de álgebra de cada sistema
+    return (
+        weekly.groupby("SalesPersonID")[["t", "Revenue"]]
+        .apply(slope)
+        .round(SLOPE_DECIMALS)
+    )
 
 
 def build_seller_summary(

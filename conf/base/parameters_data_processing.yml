@@ -1,0 +1,8 @@
+# Parámetros del pipeline data_processing
+data_processing:
+  # Fecha de corte para calcular edad y antigüedad de los vendedores
+  # (día siguiente a la última venta registrada: 2018-05-09).
+  reference_date: "2018-05-10"
+  # Rangos válidos según el negocio; filas fuera de rango se descartan.
+  quantity_range: [1, 1000]
+  valid_discounts: [0.0, 0.1, 0.2]

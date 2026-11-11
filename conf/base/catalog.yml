@@ -29,3 +29,32 @@ raw_cities:
 raw_countries:
   type: pandas.CSVDataset
   filepath: data/01_raw/countries.csv
+  load_args:
+    # el código de Australia es "NA" y pandas lo leería como valor faltante
+    keep_default_na: false
+
+# ---------- 02_intermediate: tablas limpias ----------
+sales_clean:
+  type: pandas.ParquetDataset
+  filepath: data/02_intermediate/sales_clean.parquet
+
+products_clean:
+  type: pandas.ParquetDataset
+  filepath: data/02_intermediate/products_clean.parquet
+
+employees_clean:
+  type: pandas.ParquetDataset
+  filepath: data/02_intermediate/employees_clean.parquet
+
+# ---------- 03_primary: tabla de ventas unida y enriquecida ----------
+sales_primary:
+  type: pandas.ParquetDataset
+  filepath: data/03_primary/sales_primary.parquet
+
+# ---------- 08_reporting ----------
+data_quality_report:
+  type: json.JSONDataset
+  filepath: data/08_reporting/data_quality_report.json
+  save_args:
+    indent: 2
+    ensure_ascii: false

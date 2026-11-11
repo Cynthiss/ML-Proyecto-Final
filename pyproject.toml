@@ -93,6 +93,8 @@ ignore = [
 [tool.ruff.lint.per-file-ignores]
 # los notebooks de exploración usan print/display para mostrar resultados
 "notebooks/*" = ["T201", "E402", "PLR2004"]
+# en las pruebas los valores esperados se escriben explícitamente
+"tests/*" = ["PLR2004"]
 
 [tool.kedro_telemetry]
 project_id = "b42a0747dfc94ef59c5ac9649d299ce4"

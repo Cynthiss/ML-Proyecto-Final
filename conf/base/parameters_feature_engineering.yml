@@ -1,0 +1,11 @@
+# Parámetros del pipeline feature_engineering
+feature_engineering:
+  # Rezagos (en días) de la venta diaria del vendedor
+  lags: [1, 7, 14]
+  # Ventanas (en días) para promedios y desviaciones móviles
+  rolling_windows: [7, 14, 28]
+  # Ventana (en días) para el comportamiento reciente: ventas, ticket y descuentos
+  behaviour_window: 7
+  # Últimos N días reservados como conjunto de prueba (split temporal)
+  test_days: 28
+  target: Revenue

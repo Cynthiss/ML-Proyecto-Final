@@ -58,3 +58,21 @@ data_quality_report:
   save_args:
     indent: 2
     ensure_ascii: false
+
+# ---------- 04_feature ----------
+seller_daily:
+  type: pandas.ParquetDataset
+  filepath: data/04_feature/seller_daily.parquet
+
+seller_features:
+  type: pandas.ParquetDataset
+  filepath: data/04_feature/seller_features.parquet
+
+# ---------- 05_model_input ----------
+model_input_train:
+  type: pandas.ParquetDataset
+  filepath: data/05_model_input/train.parquet
+
+model_input_test:
+  type: pandas.ParquetDataset
+  filepath: data/05_model_input/test.parquet

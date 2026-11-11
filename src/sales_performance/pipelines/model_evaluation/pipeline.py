@@ -39,7 +39,12 @@ def create_pipeline(**kwargs) -> Pipeline:
             ),
             Node(
                 func=explain_model,
-                inputs=["lightgbm_model", "model_input_test", "params:model_training"],
+                inputs=[
+                    "lightgbm_model",
+                    "model_input_test",
+                    "params:model_training",
+                    "params:feature_engineering",
+                ],
                 outputs=["feature_importance", "plot_shap_summary"],
                 name="explain_model",
             ),

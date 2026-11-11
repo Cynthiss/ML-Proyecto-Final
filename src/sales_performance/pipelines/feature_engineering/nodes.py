@@ -107,7 +107,9 @@ def build_features(
     """Construye la tabla de modelado vendedor-día.
 
     Combina calendario, historial de ventas del vendedor y su perfil
-    (edad, antigüedad, edad al ser contratado y género). Se descartan los primeros
+    (``profile_features``: edad, antigüedad y edad al ser contratado). El género
+    se excluye a propósito: este modelo informa decisiones de contratación y usar
+    género como variable sería discriminatorio. Se descartan los primeros
     días de cada vendedor, donde la ventana móvil más larga aún no está completa.
 
     Args:
@@ -124,10 +126,9 @@ def build_features(
     df = _add_calendar_features(df)
     df = _add_history_features(df, params)
 
-    profile = employees_clean[
-        ["EmployeeID", "Age", "TenureYears", "AgeAtHire", "Gender"]
-    ].rename(columns={"EmployeeID": "SalesPersonID"})
-    profile["IsFemale"] = (profile.pop("Gender") == "F").astype(int)
+    profile = employees_clean[["EmployeeID", *params["profile_features"]]].rename(
+        columns={"EmployeeID": "SalesPersonID"}
+    )
     df = df.merge(profile, on="SalesPersonID", how="left")
 
     # las variables del mismo día (NumSales, AvgTicket, DiscountShare) se

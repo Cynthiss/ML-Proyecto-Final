@@ -32,7 +32,6 @@ from sales_performance.pipelines.model_training.nodes import (  # noqa: E402
 logger = logging.getLogger(__name__)
 
 MODEL_NAMES = {"ridge": "Ridge", "lightgbm": "LightGBM"}
-PROFILE_FEATURES = ["Age", "TenureYears", "AgeAtHire", "IsFemale"]
 
 
 def _metrics(y_true: pd.Series, y_pred: pd.Series) -> dict[str, float]:
@@ -141,17 +140,21 @@ def evaluate_models(
 
 
 def explain_model(
-    lightgbm_model, test: pd.DataFrame, training_params: dict[str, Any]
+    lightgbm_model,
+    test: pd.DataFrame,
+    training_params: dict[str, Any],
+    feature_params: dict[str, Any],
 ) -> tuple[pd.DataFrame, plt.Figure]:
     """Explica el modelo LightGBM con valores SHAP.
 
     Muestra qué variables mueven el pronóstico y, en particular, cuánto pesa el
-    perfil del vendedor (edad, antigüedad, género) frente a su historial.
+    perfil del vendedor (edad y antigüedad) frente a su historial.
 
     Args:
         lightgbm_model: Modelo LightGBM entrenado.
         test: Conjunto de prueba.
         training_params: Parámetros ``model_training``.
+        feature_params: Parámetros ``feature_engineering`` (``profile_features``).
 
     Returns:
         Importancia media |SHAP| por variable y la gráfica resumen.
@@ -169,7 +172,9 @@ def explain_model(
     )
     total = importance["mean_abs_shap"].sum()
     importance["share_%"] = 100 * importance["mean_abs_shap"] / total if total else 0.0
-    importance["is_profile"] = importance["feature"].isin(PROFILE_FEATURES)
+    importance["is_profile"] = importance["feature"].isin(
+        feature_params["profile_features"]
+    )
 
     plt.figure()
     shap.summary_plot(shap_values, x, show=False, max_display=15)

@@ -9,3 +9,7 @@ feature_engineering:
   # Últimos N días reservados como conjunto de prueba (split temporal)
   test_days: 28
   target: Revenue
+  # Variables de perfil del vendedor que entran al modelo. El género NO se incluye:
+  # el modelo informa decisiones de contratación y usarlo sería discriminatorio.
+  # (La diferencia por género se evalúa aparte, solo como prueba estadística.)
+  profile_features: [Age, TenureYears, AgeAtHire]

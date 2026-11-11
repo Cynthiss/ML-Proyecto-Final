@@ -15,6 +15,7 @@ PARAMS = {
     "behaviour_window": 2,
     "test_days": 2,
     "target": "Revenue",
+    "profile_features": ["Age", "TenureYears", "AgeAtHire"],
 }
 
 
@@ -69,7 +70,9 @@ def test_build_features_has_no_leakage(sales_primary, employees):
     assert seller2.loc[5, "Revenue_rmean2"] == pytest.approx(35.0)
     assert "NumSales" not in feats.columns
     assert feats.isna().sum().sum() == 0
-    assert set(feats["IsFemale"]) == {0, 1}
+    # el género nunca entra al modelo
+    assert not {"Gender", "IsFemale"} & set(feats.columns)
+    assert {"Age", "TenureYears", "AgeAtHire"} <= set(feats.columns)
 
 
 def test_split_train_test_is_temporal(sales_primary, employees):

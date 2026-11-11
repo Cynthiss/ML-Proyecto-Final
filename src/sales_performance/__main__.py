@@ -11,6 +11,7 @@ from kedro.framework.project import configure_project
 
 
 def main(*args, **kwargs) -> Any:
+    """Ejecuta el comando ``kedro run`` del proyecto desde la línea de comandos."""
     package_name = Path(__file__).parent.name
     configure_project(package_name)
 

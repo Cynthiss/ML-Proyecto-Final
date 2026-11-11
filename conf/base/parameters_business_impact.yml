@@ -1,0 +1,13 @@
+# Parámetros del pipeline business_impact
+business_impact:
+  # Días de un año para anualizar las cifras del periodo observado (ene-may 2018)
+  days_per_year: 365
+  # Escenarios de reducción del monto otorgado en descuentos (0.5 = la mitad)
+  discount_reduction_scenarios: [0.25, 0.5, 1.0]
+  # Una venta es "de mayor valor" si el precio del producto supera este cuantil
+  high_value_price_quantile: 0.75
+  # Meta de venta sugestiva: los vendedores por debajo de este cuantil del equipo
+  # (unidades por venta de mayor valor) suben hasta alcanzarlo (0.5 = mediana)
+  upsell_target_quantile: 0.5
+  # Línea base "ingenua" contra la que se compara la precisión de las metas
+  naive_baseline: "Ayer (naive)"

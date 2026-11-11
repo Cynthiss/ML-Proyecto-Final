@@ -22,6 +22,7 @@ EXPECTED_PIPELINES = {
     "model_training",
     "model_evaluation",
     "sales_analysis",
+    "business_impact",
 }
 
 
@@ -58,6 +59,7 @@ def test_full_pipeline_runs_on_sample(ci_run):
         "sales_insights.json",
         "shap_summary.png",
         "seller_contribution.png",
+        "business_impact.json",
     ]:
         assert (reporting / name).exists(), name
     assert (ci_run / "06_models" / "lightgbm_model.pkl").exists()

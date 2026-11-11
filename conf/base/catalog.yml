@@ -206,3 +206,24 @@ plot_profile_vs_performance:
   save_args:
     dpi: 150
     bbox_inches: tight
+
+# ---------- 08_reporting: impacto de negocio ----------
+business_impact:
+  type: json.JSONDataset
+  filepath: ${globals:paths.data}/08_reporting/business_impact.json
+  save_args:
+    indent: 2
+    ensure_ascii: false
+
+upsell_by_seller:
+  type: pandas.CSVDataset
+  filepath: ${globals:paths.data}/08_reporting/upsell_by_seller.csv
+  save_args:
+    index: false
+
+plot_business_impact:
+  type: matplotlib.MatplotlibDataset
+  filepath: ${globals:paths.data}/08_reporting/business_impact.png
+  save_args:
+    dpi: 150
+    bbox_inches: tight

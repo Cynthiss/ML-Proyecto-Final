@@ -1,0 +1,7 @@
+# Entorno de integración continua (kedro run --env ci).
+# Usa la muestra versionada de data/00_sample (las tablas completas pesan ~500 MB
+# y no se suben a GitHub) y guarda los resultados en data/ci/ para no
+# sobrescribir los resultados del entorno base.
+paths:
+  raw: data/00_sample
+  data: data/ci

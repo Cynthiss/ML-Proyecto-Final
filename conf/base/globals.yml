@@ -1,0 +1,5 @@
+# Rutas base de los datos. El entorno "ci" (conf/ci/globals.yml) las cambia
+# para leer una muestra pequeña y escribir los resultados en otra carpeta.
+paths:
+  raw: data/01_raw
+  data: data

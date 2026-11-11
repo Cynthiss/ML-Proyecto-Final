@@ -4,31 +4,31 @@
 # ---------- 01_raw: tablas originales del curso ----------
 raw_sales:
   type: pandas.CSVDataset
-  filepath: data/01_raw/sales.csv
+  filepath: ${globals:paths.raw}/sales.csv
 
 raw_products:
   type: pandas.CSVDataset
-  filepath: data/01_raw/products.csv
+  filepath: ${globals:paths.raw}/products.csv
 
 raw_categories:
   type: pandas.CSVDataset
-  filepath: data/01_raw/categories.csv
+  filepath: ${globals:paths.raw}/categories.csv
 
 raw_employees:
   type: pandas.CSVDataset
-  filepath: data/01_raw/employees.csv
+  filepath: ${globals:paths.raw}/employees.csv
 
 raw_customers:
   type: pandas.CSVDataset
-  filepath: data/01_raw/customers.csv
+  filepath: ${globals:paths.raw}/customers.csv
 
 raw_cities:
   type: pandas.CSVDataset
-  filepath: data/01_raw/cities.csv
+  filepath: ${globals:paths.raw}/cities.csv
 
 raw_countries:
   type: pandas.CSVDataset
-  filepath: data/01_raw/countries.csv
+  filepath: ${globals:paths.raw}/countries.csv
   load_args:
     # el código de Australia es "NA" y pandas lo leería como valor faltante
     keep_default_na: false
@@ -36,25 +36,25 @@ raw_countries:
 # ---------- 02_intermediate: tablas limpias ----------
 sales_clean:
   type: pandas.ParquetDataset
-  filepath: data/02_intermediate/sales_clean.parquet
+  filepath: ${globals:paths.data}/02_intermediate/sales_clean.parquet
 
 products_clean:
   type: pandas.ParquetDataset
-  filepath: data/02_intermediate/products_clean.parquet
+  filepath: ${globals:paths.data}/02_intermediate/products_clean.parquet
 
 employees_clean:
   type: pandas.ParquetDataset
-  filepath: data/02_intermediate/employees_clean.parquet
+  filepath: ${globals:paths.data}/02_intermediate/employees_clean.parquet
 
 # ---------- 03_primary: tabla de ventas unida y enriquecida ----------
 sales_primary:
   type: pandas.ParquetDataset
-  filepath: data/03_primary/sales_primary.parquet
+  filepath: ${globals:paths.data}/03_primary/sales_primary.parquet
 
 # ---------- 08_reporting ----------
 data_quality_report:
   type: json.JSONDataset
-  filepath: data/08_reporting/data_quality_report.json
+  filepath: ${globals:paths.data}/08_reporting/data_quality_report.json
   save_args:
     indent: 2
     ensure_ascii: false
@@ -62,84 +62,84 @@ data_quality_report:
 # ---------- 04_feature ----------
 seller_daily:
   type: pandas.ParquetDataset
-  filepath: data/04_feature/seller_daily.parquet
+  filepath: ${globals:paths.data}/04_feature/seller_daily.parquet
 
 seller_features:
   type: pandas.ParquetDataset
-  filepath: data/04_feature/seller_features.parquet
+  filepath: ${globals:paths.data}/04_feature/seller_features.parquet
 
 # ---------- 05_model_input ----------
 model_input_train:
   type: pandas.ParquetDataset
-  filepath: data/05_model_input/train.parquet
+  filepath: ${globals:paths.data}/05_model_input/train.parquet
 
 model_input_test:
   type: pandas.ParquetDataset
-  filepath: data/05_model_input/test.parquet
+  filepath: ${globals:paths.data}/05_model_input/test.parquet
 
 # ---------- 06_models ----------
 ridge_model:
   type: pickle.PickleDataset
-  filepath: data/06_models/ridge_model.pkl
+  filepath: ${globals:paths.data}/06_models/ridge_model.pkl
 
 lightgbm_model:
   type: pickle.PickleDataset
-  filepath: data/06_models/lightgbm_model.pkl
+  filepath: ${globals:paths.data}/06_models/lightgbm_model.pkl
 
 best_params:
   type: json.JSONDataset
-  filepath: data/06_models/best_params.json
+  filepath: ${globals:paths.data}/06_models/best_params.json
   save_args:
     indent: 2
 
 optuna_trials:
   type: pandas.CSVDataset
-  filepath: data/06_models/optuna_trials.csv
+  filepath: ${globals:paths.data}/06_models/optuna_trials.csv
   save_args:
     index: false
 
 # ---------- 07_model_output ----------
 test_predictions:
   type: pandas.ParquetDataset
-  filepath: data/07_model_output/test_predictions.parquet
+  filepath: ${globals:paths.data}/07_model_output/test_predictions.parquet
 
 # ---------- 08_reporting: evaluación ----------
 model_metrics:
   type: pandas.CSVDataset
-  filepath: data/08_reporting/model_metrics.csv
+  filepath: ${globals:paths.data}/08_reporting/model_metrics.csv
   save_args:
     index: false
 
 model_selection:
   type: json.JSONDataset
-  filepath: data/08_reporting/model_selection.json
+  filepath: ${globals:paths.data}/08_reporting/model_selection.json
   save_args:
     indent: 2
     ensure_ascii: false
 
 feature_importance:
   type: pandas.CSVDataset
-  filepath: data/08_reporting/feature_importance_shap.csv
+  filepath: ${globals:paths.data}/08_reporting/feature_importance_shap.csv
   save_args:
     index: false
 
 plot_shap_summary:
   type: matplotlib.MatplotlibDataset
-  filepath: data/08_reporting/shap_summary.png
+  filepath: ${globals:paths.data}/08_reporting/shap_summary.png
   save_args:
     dpi: 150
     bbox_inches: tight
 
 plot_forecast_vs_actual:
   type: matplotlib.MatplotlibDataset
-  filepath: data/08_reporting/forecast_vs_actual.png
+  filepath: ${globals:paths.data}/08_reporting/forecast_vs_actual.png
   save_args:
     dpi: 150
     bbox_inches: tight
 
 plot_model_comparison:
   type: matplotlib.MatplotlibDataset
-  filepath: data/08_reporting/model_comparison.png
+  filepath: ${globals:paths.data}/08_reporting/model_comparison.png
   save_args:
     dpi: 150
     bbox_inches: tight
@@ -147,62 +147,62 @@ plot_model_comparison:
 # ---------- 08_reporting: análisis descriptivo del reto ----------
 seller_summary:
   type: pandas.CSVDataset
-  filepath: data/08_reporting/seller_summary.csv
+  filepath: ${globals:paths.data}/08_reporting/seller_summary.csv
   save_args:
     index: false
 
 sales_insights:
   type: json.JSONDataset
-  filepath: data/08_reporting/sales_insights.json
+  filepath: ${globals:paths.data}/08_reporting/sales_insights.json
   save_args:
     indent: 2
     ensure_ascii: false
 
 plot_weekly_trend:
   type: matplotlib.MatplotlibDataset
-  filepath: data/08_reporting/weekly_trend.png
+  filepath: ${globals:paths.data}/08_reporting/weekly_trend.png
   save_args:
     dpi: 150
     bbox_inches: tight
 
 plot_weekday_pattern:
   type: matplotlib.MatplotlibDataset
-  filepath: data/08_reporting/weekday_pattern.png
+  filepath: ${globals:paths.data}/08_reporting/weekday_pattern.png
   save_args:
     dpi: 150
     bbox_inches: tight
 
 plot_seller_contribution:
   type: matplotlib.MatplotlibDataset
-  filepath: data/08_reporting/seller_contribution.png
+  filepath: ${globals:paths.data}/08_reporting/seller_contribution.png
   save_args:
     dpi: 150
     bbox_inches: tight
 
 plot_seller_trend:
   type: matplotlib.MatplotlibDataset
-  filepath: data/08_reporting/seller_trend.png
+  filepath: ${globals:paths.data}/08_reporting/seller_trend.png
   save_args:
     dpi: 150
     bbox_inches: tight
 
 plot_volume_vs_ticket:
   type: matplotlib.MatplotlibDataset
-  filepath: data/08_reporting/volume_vs_ticket.png
+  filepath: ${globals:paths.data}/08_reporting/volume_vs_ticket.png
   save_args:
     dpi: 150
     bbox_inches: tight
 
 plot_discount_effect:
   type: matplotlib.MatplotlibDataset
-  filepath: data/08_reporting/discount_effect.png
+  filepath: ${globals:paths.data}/08_reporting/discount_effect.png
   save_args:
     dpi: 150
     bbox_inches: tight
 
 plot_profile_vs_performance:
   type: matplotlib.MatplotlibDataset
-  filepath: data/08_reporting/profile_vs_performance.png
+  filepath: ${globals:paths.data}/08_reporting/profile_vs_performance.png
   save_args:
     dpi: 150
     bbox_inches: tight

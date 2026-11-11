@@ -76,3 +76,25 @@ model_input_train:
 model_input_test:
   type: pandas.ParquetDataset
   filepath: data/05_model_input/test.parquet
+
+# ---------- 06_models ----------
+ridge_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/ridge_model.pkl
+
+lightgbm_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/lightgbm_model.pkl
+
+best_params:
+  type: json.JSONDataset
+  filepath: data/06_models/best_params.json
+  save_args:
+    indent: 2
+
+optuna_trials:
+  type: pandas.CSVDataset
+  filepath: data/06_models/optuna_trials.csv
+  save_args:
+    index: false
+

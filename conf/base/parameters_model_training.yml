@@ -1,0 +1,24 @@
+# Parámetros del pipeline model_training
+model_training:
+  target: Revenue
+  # Columnas que no se usan como variables explicativas. El ID del vendedor se
+  # excluye a propósito: el modelo debe explicar la venta por historial y perfil,
+  # y así puede aplicarse a vendedores nuevos (pregunta de contratación).
+  exclude_features: [SalesPersonID, Date]
+  # Validación cruzada temporal dentro del entrenamiento (bloques de fechas)
+  cv_splits: 4
+  random_state: 42
+  optuna:
+    n_trials: 40
+    # Espacio de búsqueda de LightGBM
+    lightgbm:
+      n_estimators: [100, 800]
+      learning_rate: [0.01, 0.2]
+      num_leaves: [4, 64]
+      min_child_samples: [10, 100]
+      subsample: [0.6, 1.0]
+      colsample_bytree: [0.5, 1.0]
+      reg_lambda: [0.001, 10.0]
+    # Espacio de búsqueda de Ridge (regularización)
+    ridge:
+      alpha: [0.01, 100000.0]

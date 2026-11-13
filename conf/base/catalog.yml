@@ -5,26 +5,38 @@
 raw_sales:
   type: pandas.CSVDataset
   filepath: ${globals:paths.raw}/sales.csv
+  load_args:
+    encoding: latin-1
 
 raw_products:
   type: pandas.CSVDataset
   filepath: ${globals:paths.raw}/products.csv
+  load_args:
+    encoding: latin-1
 
 raw_categories:
   type: pandas.CSVDataset
   filepath: ${globals:paths.raw}/categories.csv
+  load_args:
+    encoding: latin-1
 
 raw_employees:
   type: pandas.CSVDataset
   filepath: ${globals:paths.raw}/employees.csv
+  load_args:
+    encoding: latin-1
 
 raw_customers:
   type: pandas.CSVDataset
   filepath: ${globals:paths.raw}/customers.csv
+  load_args:
+    encoding: latin-1
 
 raw_cities:
   type: pandas.CSVDataset
   filepath: ${globals:paths.raw}/cities.csv
+  load_args:
+    encoding: latin-1
 
 raw_countries:
   type: pandas.CSVDataset
@@ -57,7 +69,7 @@ data_quality_report:
   filepath: ${globals:paths.data}/08_reporting/data_quality_report.json
   save_args:
     indent: 2
-    ensure_ascii: false
+    ensure_ascii: true
 
 # ---------- 04_feature ----------
 seller_daily:
@@ -95,8 +107,11 @@ best_params:
 optuna_trials:
   type: pandas.CSVDataset
   filepath: ${globals:paths.data}/06_models/optuna_trials.csv
+  load_args:
+    encoding: latin-1
   save_args:
     index: false
+    encoding: latin-1
 
 # ---------- 07_model_output ----------
 test_predictions:
@@ -107,21 +122,27 @@ test_predictions:
 model_metrics:
   type: pandas.CSVDataset
   filepath: ${globals:paths.data}/08_reporting/model_metrics.csv
+  load_args:
+    encoding: latin-1
   save_args:
     index: false
+    encoding: latin-1
 
 model_selection:
   type: json.JSONDataset
   filepath: ${globals:paths.data}/08_reporting/model_selection.json
   save_args:
     indent: 2
-    ensure_ascii: false
+    ensure_ascii: true
 
 feature_importance:
   type: pandas.CSVDataset
   filepath: ${globals:paths.data}/08_reporting/feature_importance_shap.csv
+  load_args:
+    encoding: latin-1
   save_args:
     index: false
+    encoding: latin-1
 
 plot_shap_summary:
   type: matplotlib.MatplotlibDataset
@@ -148,15 +169,18 @@ plot_model_comparison:
 seller_summary:
   type: pandas.CSVDataset
   filepath: ${globals:paths.data}/08_reporting/seller_summary.csv
+  load_args:
+    encoding: latin-1
   save_args:
     index: false
+    encoding: latin-1
 
 sales_insights:
   type: json.JSONDataset
   filepath: ${globals:paths.data}/08_reporting/sales_insights.json
   save_args:
     indent: 2
-    ensure_ascii: false
+    ensure_ascii: true
 
 plot_weekly_trend:
   type: matplotlib.MatplotlibDataset
@@ -213,13 +237,16 @@ business_impact:
   filepath: ${globals:paths.data}/08_reporting/business_impact.json
   save_args:
     indent: 2
-    ensure_ascii: false
+    ensure_ascii: true
 
 upsell_by_seller:
   type: pandas.CSVDataset
   filepath: ${globals:paths.data}/08_reporting/upsell_by_seller.csv
+  load_args:
+    encoding: latin-1
   save_args:
     index: false
+    encoding: latin-1
 
 plot_business_impact:
   type: matplotlib.MatplotlibDataset

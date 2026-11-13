@@ -23,21 +23,24 @@
 ## Estructura del repositorio
 
 ```
-├── .github/workflows/ci.yml   # GitHub Actions: Ruff + pytest + kedro run
+├── .github/workflows/ci.yml              # GitHub Actions: Ruff + pytest + kedro run
 ├── conf/
-│   ├── base/                  # catálogo, parámetros y rutas (globals.yml)
-│   └── ci/                    # entorno de CI: usa la muestra de data/00_sample
+│   ├── base/                             # catálogo, parámetros y rutas (globals.yml)
+│   └── ci/                               # entorno de CI: usa la muestra de data/00_sample
 ├── data/
-│   ├── 00_sample/             # muestra versionada (0.5% de las ventas) para CI
-│   ├── 01_raw/                # tablas completas del curso (NO versionadas)
+│   ├── 00_sample/                        # muestra versionada (0.5% de las ventas) para CI
+│   ├── 01_raw/                           # tablas completas del curso (NO versionadas)
 │   └── 02_intermediate … 08_reporting/   # salidas generadas por kedro run
-├── docs/erd.png               # diagrama entidad-relación
+├── docs/
+│   ├── erd.png                           # diagrama entidad-relación
+│   └── figuras/                          # figuras exportadas desde 02_resultados.ipynb
 ├── notebooks/
-│   ├── 00_intro.ipynb         # introducción al dataset (material del curso)
-│   └── 01_exploracion.ipynb   # exploración: calidad, outliers, patrones y decisiones
-├── scripts/make_sample.py     # genera data/00_sample a partir de data/01_raw
-├── src/sales_performance/pipelines/   # un paquete por pipeline (nodes.py + pipeline.py)
-└── tests/                     # pruebas unitarias por pipeline + integración
+│   ├── 00_intro.ipynb                    # introducción al dataset (material del curso)
+│   ├── 01_exploracion.ipynb              # exploración: calidad, outliers, patrones y decisiones
+│   └── 02_resultados.ipynb               # resultados del pipeline: modelos, SHAP e impacto
+├── scripts/make_sample.py                # genera data/00_sample a partir de data/01_raw
+├── src/sales_performance/pipelines/      # un paquete por pipeline (nodes.py + pipeline.py)
+└── tests/                                # pruebas unitarias por pipeline + integración
 ```
 
 ## Instalación
@@ -45,8 +48,6 @@
 Se requiere Python 3.10 o superior; el proyecto se probó con 3.12.
 
 ```bash
-git clone https://github.com/Cynthiss/ML-Proyecto-Final.git
-cd ML-Proyecto-Final
 python -m venv .venv
 source .venv/bin/activate        # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
@@ -55,19 +56,46 @@ pip install -e ".[dev]"
 
 ## Datos
 
-Copiar las siete tablas del curso en `data/01_raw/`:
-
 ```
 data/01_raw/
 ├── sales.csv  products.csv  categories.csv  employees.csv
 └── customers.csv  cities.csv  countries.csv
 ```
 
-`sales.csv` pesa ~500 MB y GitHub no acepta archivos de más de 100 MB, por eso `data/01_raw/` no se versiona. El diagrama entidad-relación está en [docs/erd.png](docs/erd.png).
+El diagrama entidad-relación está en [docs/erd.png](docs/erd.png).
 
+## Ejecución
 
+```bash
+# Pipeline completo con los datos reales (requiere data/01_raw/)
+kedro run
+
+# Pipeline con la muestra de CI (rápido, solo para validar)
+kedro run --env ci --params "model_training.optuna.n_trials=5"
+
+# Pruebas y estilo
+pytest
+ruff check .
+ruff format --check .
+```
+
+Los resultados quedan en `data/08_reporting/` (o `data/ci/08_reporting/` con `--env ci`): métricas de modelos, selección, importancia SHAP, insights de ventas e impacto de negocio, junto con las figuras en PNG.
+
+## Resultados
+
+El análisis completo está en `notebooks/02_resultados.ipynb` y en `data/08_reporting/`. Resumen:
+
+- **Selección de modelo:** se compararon Ridge y LightGBM (hiperparámetros ajustados con Optuna y validación cruzada temporal) contra cuatro líneas base. Ningún modelo ML superó el umbral de negocio de mejorar el MAE en ≥2%, así que **la recomendación es la línea base "Promedio histórico del vendedor"** (MAE ≈ 32,311). LightGBM solo mejoró 0.10%.
+- **Lectura de negocio:** la venta diaria es muy estable (~Q33M, variación ~2.8% por vendedor) y no tiene inercia día a día; lo que diferencia a los vendedores es el **ticket promedio** y cuánto concentran unidades en ventas de mayor valor.
+- **Descuentos:** no generan volumen adicional (~13 unidades por venta con 0%, 10% o 20% de descuento); solo reducen ingreso (~Q132.5M otorgados en el periodo).
+- **Accionables:** meta diaria por vendedor con error ~2.2% usando el promedio histórico, escenario de reducción de descuentos y meta de ticket para ventas de alto valor (ver `business_impact.json`).
 
 ## Fuentes y herramientas
 
-- Dataset de ventas compartido por el curso.
-- [Kedro](https://kedro.org), [Optuna](https://optuna.org), [LightGBM](https://lightgbm.readthedocs.io), [scikit-learn](https://scikit-learn.org), [SHAP](https://shap.readthedocs.io), [SciPy](https://scipy.org), [Ruff](https://docs.astral.sh/ruff/).
+- [Kedro](https://kedro.org)
+- [Optuna](https://optuna.org)
+- [LightGBM](https://lightgbm.readthedocs.io)
+- [scikit-learn](https://scikit-learn.org)
+- [SHAP](https://shap.readthedocs.io)
+- [SciPy](https://scipy.org)
+- [Ruff](https://docs.astral.sh/ruff/)

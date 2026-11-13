@@ -1,0 +1,63 @@
+{
+  "selected_model": "Promedio histórico del vendedor",
+  "best_baseline_mae": 32310.53,
+  "best_ml_mae": 32276.89,
+  "ml_improvement_%": 0.1,
+  "reason": "LightGBM tiene un MAE 0.10% menor que 'Promedio histórico del vendedor'; no alcanza el umbral de 2%, por lo que se recomienda la alternativa más simple.",
+  "top_features": [
+    "Revenue_expanding_mean",
+    "AvgTicket_rmean7",
+    "DiscountShare_lag1",
+    "DiscountShare_rmean7",
+    "Revenue_lag14"
+  ],
+  "business_impact": {
+    "discounts": {
+      "discount_given_period": 132468072.83,
+      "discount_given_annual": 374812764.21,
+      "units_per_sale_by_discount": {
+        "0%": 13.0,
+        "10%": 13.02,
+        "20%": 13.0
+      },
+      "scenarios": [
+        {
+          "reduction_pct": 25.0,
+          "recovered_period": 33117018.21,
+          "recovered_annual": 93703191.05,
+          "revenue_increase_pct": 0.77
+        },
+        {
+          "reduction_pct": 50.0,
+          "recovered_period": 66234036.41,
+          "recovered_annual": 187406382.1,
+          "revenue_increase_pct": 1.54
+        },
+        {
+          "reduction_pct": 100.0,
+          "recovered_period": 132468072.83,
+          "recovered_annual": 374812764.21,
+          "revenue_increase_pct": 3.09
+        }
+      ],
+      "assumption": "Las unidades por venta no cambian al reducir el descuento (en los datos son iguales con 0%, 10% y 20%). No se puede medir si algún cliente dejaría de comprar."
+    },
+    "upselling": {
+      "high_value_price_threshold": 75.25,
+      "target_units_per_high_value_sale": 13.01,
+      "sellers_below_target": 11,
+      "uplift_period": 7918241.72,
+      "uplift_annual": 22404327.34,
+      "revenue_increase_pct": 0.18,
+      "assumption": "Las unidades adicionales se suman a la venta (no reemplazan otras) y el número de ventas de cada vendedor no cambia. La meta es el nivel que ya alcanza la mitad del equipo, por lo que es realista."
+    },
+    "goals": {
+      "selected_forecast": "Promedio histórico del vendedor",
+      "daily_goal_error_pct": 2.24,
+      "daily_goal_error_abs": 32310.53,
+      "naive_rule": "Ayer (naive)",
+      "naive_error_pct": 3.13,
+      "error_reduction_pct": 28.6
+    }
+  }
+}

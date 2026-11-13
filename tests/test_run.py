@@ -73,11 +73,15 @@ def test_sample_outputs_are_consistent(ci_run):
     assert quality["rows_clean"] <= quality["rows_raw"]
     assert quality["total_revenue"] > 0
 
-    summary = pd.read_csv(ci_run / "08_reporting" / "seller_summary.csv")
+    summary = pd.read_csv(
+        ci_run / "08_reporting" / "seller_summary.csv", encoding="latin-1"
+    )
     assert summary["SharePct"].sum() == pytest.approx(100.0)
 
     selection = json.loads(
         (ci_run / "08_reporting" / "model_selection.json").read_text()
     )
-    metrics = pd.read_csv(ci_run / "08_reporting" / "model_metrics.csv")
+    metrics = pd.read_csv(
+        ci_run / "08_reporting" / "model_metrics.csv", encoding="latin-1"
+    )
     assert selection["selected_model"] in set(metrics["model"])

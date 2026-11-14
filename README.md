@@ -89,6 +89,9 @@ El análisis completo está en `notebooks/02_resultados.ipynb` y en `data/08_rep
 - **Lectura de negocio:** la venta diaria es muy estable (~Q33M, variación ~2.8% por vendedor) y no tiene inercia día a día; lo que diferencia a los vendedores es el **ticket promedio** y cuánto concentran unidades en ventas de mayor valor.
 - **Descuentos:** no generan volumen adicional (~13 unidades por venta con 0%, 10% o 20% de descuento); solo reducen ingreso (~Q132.5M otorgados en el periodo).
 - **Accionables:** meta diaria por vendedor con error ~2.2% usando el promedio histórico, escenario de reducción de descuentos y meta de ticket para ventas de alto valor (ver `business_impact.json`).
+
+
+
 | **Impacto esperado** | Calculado en el pipeline `business_impact` ([detalle abajo](#impacto-estimado)): metas diarias con 2.2% de error (28.6% menos que usar la venta de ayer), hasta **Q187M al año** al reducir los descuentos a la mitad y **Q22M al año** con venta sugestiva, además de criterios de contratación respaldados por datos. |
 
 ## Resultados principales
